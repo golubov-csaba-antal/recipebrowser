@@ -1,0 +1,28 @@
+*.iml
+.gradle
+.kotlin
+/local.properties
+/.idea/*
+!/.idea/codeStyles
+/.idea/codeStyles/*
+!/.idea/codeStyles/Project.xml
+!/.idea/codeStyles/codeStyleConfig.xml
+.DS_Store
+/build
+/buildSrc/build
+/captures
+**/build/
+**/screenshots/
+.externalNativeBuild
+.cxx
+local.properties
+# fastlane specific
+**/fastlane/report.xml
+# deliver temporary files
+**/fastlane/Preview.html
+# scan temporary files
+**/fastlane/test_output
+
+.classpath
+.project
+.settings/
