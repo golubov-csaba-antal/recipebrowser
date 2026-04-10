@@ -33,9 +33,7 @@ fun RandomRecipe(
 
     var showContent by remember { mutableStateOf(false) }
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .safeContentPadding(),
+        modifier = modifier,
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
