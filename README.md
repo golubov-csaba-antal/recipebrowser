@@ -1,5 +1,23 @@
 This is a Kotlin Multiplatform project targeting Android, iOS.
 
+The basic navigation flow works similar to the Panorama control in Windows Phone - one big and parallel-scrolling background image, a big and parallel-scrolling thin text, and the horizontal paging content.
+
+Not tested on iOS yet, only on my A55, so it might will change later if the big image cause problems on iOS. :)
+
+Screenshots:
+
+<img src="https://github.com/user-attachments/assets/c8050bc1-52a9-43c8-8156-f13eeb353fe1" width="240">
+
+<img src="https://github.com/user-attachments/assets/e337d601-2ce9-4c7f-a6ea-07e6756d636a" width="240">
+
+<img src="https://github.com/user-attachments/assets/f7d04bbf-3292-497f-9065-e0ae13e0748f" width="240">
+
+Video:
+
+https://drive.google.com/file/d/1DSBn0iWkX1jF4t90TrHwggbc8QRZiQ8A/view?usp=sharing
+
+The modules of the project
+
 * [/composeApp](./composeApp/src) is for code that will be shared across your Compose Multiplatform applications.
   It contains several subfolders:
   - [commonMain](./composeApp/src/commonMain/kotlin) is for code that’s common for all targets.
