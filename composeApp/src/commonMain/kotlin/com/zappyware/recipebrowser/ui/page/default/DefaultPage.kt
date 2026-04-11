@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -14,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.zappyware.recipebrowser.Greeting
 import org.jetbrains.compose.resources.painterResource
 import recipebrowser.composeapp.generated.resources.Res
@@ -22,15 +24,15 @@ import recipebrowser.composeapp.generated.resources.compose_multiplatform
 @Composable
 fun DefaultPage(
     modifier: Modifier = Modifier,
-    pageIndex: Int,
 ) {
     var showContent by remember { mutableStateOf(false) }
     Column(
-        modifier = modifier,
+        modifier = modifier
+            .padding(horizontal = 24.dp),
     ) {
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = "Page $pageIndex",
+            text = "Default Page",
             style = MaterialTheme.typography.headlineLarge,
         )
         Button(onClick = { showContent = !showContent }) {

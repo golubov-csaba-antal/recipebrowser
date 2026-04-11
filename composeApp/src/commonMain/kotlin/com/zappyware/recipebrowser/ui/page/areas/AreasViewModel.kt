@@ -1,14 +1,15 @@
-package com.zappyware.recipebrowser.ui.page.random
+package com.zappyware.recipebrowser.ui.page.areas
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zappyware.recipebrowser.data.Area
 import com.zappyware.recipebrowser.repository.RecipeRepository
 import com.zappyware.recipebrowser.ui.UIState
 import com.zappyware.recipebrowser.util.orDefaultError
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-class RandomRecipeViewModel(
+class AreasViewModel(
     private val recipeRepository: RecipeRepository,
 ): ViewModel() {
 
@@ -16,12 +17,12 @@ class RandomRecipeViewModel(
 
     init {
         viewModelScope.launch {
-            getRandomRecipe()
+            getAreas()
         }
     }
 
-    private suspend fun getRandomRecipe() {
-        val response = recipeRepository.getRandomRecipe()
+    private suspend fun getAreas() {
+        val response = recipeRepository.getAreas()
         if (null == response.data) {
             uiState.emit(
                 UIState.Error(response.error.orDefaultError())
@@ -31,5 +32,9 @@ class RandomRecipeViewModel(
                 UIState.Success(response.data)
             )
         }
+    }
+
+    fun onLoadRelatedRecipes(category: Area) {
+        // todo
     }
 }

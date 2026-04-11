@@ -2,15 +2,10 @@ package com.zappyware.recipebrowser.ui.composable
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.absoluteOffset
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredWidth
-import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
@@ -27,25 +22,28 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import coil3.util.DebugLogger
 import com.zappyware.recipebrowser.ui.mapper.LocalPageMapper
 import com.zappyware.recipebrowser.ui.mapper.PageMapper
+import com.zappyware.recipebrowser.ui.page.Pages
 import org.jetbrains.compose.resources.painterResource
-import org.koin.core.logger.Logger
 import recipebrowser.composeapp.generated.resources.Res
 import recipebrowser.composeapp.generated.resources.pager_background
+
+private const val BackgroundImageWidth = 3845f
+private const val BackgroundImageHeight = 1090f
+private const val TitleParallelScrollOffset = 0.75f
 
 @Composable
 fun Panorama(
     modifier: Modifier = Modifier,
-    pageCount: Int,
+    pages: List<Pages>,
     pageMapper: PageMapper = LocalPageMapper.current,
 ) {
     val localWindow = LocalWindowInfo.current
     val containerWidth = localWindow.containerDpSize.width
     val containerHeight = localWindow.containerDpSize.height
     val pageWidth = remember(containerWidth) { (containerWidth.value * 0.9f).dp }
-    val pagerState = rememberPagerState { pageCount }
+    val pagerState = rememberPagerState { pages.size }
 
     Box(
         modifier = modifier,
@@ -53,23 +51,49 @@ fun Panorama(
     ) {
         Image(
             modifier = Modifier.height(containerHeight)
-                .requiredWidth((containerHeight.value / 1090f * 3845f).dp)
-                .align(Alignment.TopStart)
+                .requiredWidth((containerHeight.value / BackgroundImageHeight * BackgroundImageWidth).dp)
                 .graphicsLayer {
-                    translationX = (size.width - containerWidth.toPx()) / 2f + (-(pagerState.currentPage + pagerState.currentPageOffsetFraction) / pageCount * 3845f)
+                    /**
+                     * We need to calculate with the default behavior of requiredWidth:
+                     * "..., and the position of the content will be automatically
+                     * offset to be centered on the space assigned to the child by
+                     * the parent layout under the assumption that Constraints were
+                     * respected."
+                     *
+                     * So if we want to display the start side of the image
+                     * at the start side of the screen, we need to shift
+                     * the translationX by the half of the image's width
+                     * minus the half of the parent's width.
+                     *
+                     * Then we can add the HorizontalPager scroll position percentage
+                     * (page + page offset, where 100% means the last page)
+                     * and translate the image by that percentage.
+                     *
+                     * so translateX = (fixed start offset) + (scroll percentage * image width)
+                     */
+                    translationX = ((size.width - containerWidth.toPx()) / 2f) + (-(pagerState.currentPage + pagerState.currentPageOffsetFraction) / pages.size * BackgroundImageWidth)
                 },
             painter = painterResource(Res.drawable.pager_background),
             contentDescription = null,
             contentScale = ContentScale.FillHeight,
             alignment = Alignment.TopStart,
-            alpha = 0.70f,
+            alpha = 0.50f,
         )
         Text(
             modifier = Modifier
                 .requiredWidth(720.dp)
                 .padding(top = 48.dp, start = 24.dp)
                 .graphicsLayer {
-                    translationX = (size.width - containerWidth.toPx()) / 2f + (-(pagerState.currentPage + pagerState.currentPageOffsetFraction) * pageWidth.toPx() * 0.75f)
+                    /**
+                     * Same in english
+                     *
+                     * Except one thing: the title text should scroll by a given offset
+                     * to make it look like the good old parallel scrolling.
+                     *
+                     * We don't have to calculate with the image's width, just do the
+                     * page scroll with a given constant offset, and we're good.
+                     */
+                    translationX = ((size.width - containerWidth.toPx()) / 2f) + (-(pagerState.currentPage + pagerState.currentPageOffsetFraction) * pageWidth.toPx() * TitleParallelScrollOffset)
                 },
             text = "Recipe Browser",
             textAlign = TextAlign.Start,
@@ -87,9 +111,8 @@ fun Panorama(
         ) { pageIndex ->
             pageMapper.Map(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 24.dp),
-                pageIndex = pageIndex
+                    .fillMaxSize(),
+                page = pages[pageIndex]
             )
         }
     }

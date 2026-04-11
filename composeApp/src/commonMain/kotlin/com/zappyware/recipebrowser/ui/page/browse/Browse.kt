@@ -1,33 +1,30 @@
-package com.zappyware.recipebrowser.ui.page.random
+package com.zappyware.recipebrowser.ui.page.browse
 
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.zappyware.recipebrowser.data.RecipeList
-import com.zappyware.recipebrowser.ui.composable.RecipeContent
 import com.zappyware.recipebrowser.ui.page.Page
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun RandomRecipe(
+fun Browse(
     modifier: Modifier = Modifier,
-    viewModel: RandomRecipeViewModel = koinViewModel()
+    viewModel: BrowseViewModel = koinViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Page(
         modifier = modifier,
         uiState = uiState,
-        pageTitle = "Recommended recipe"
+        pageTitle = "Browse"
     ) { modifier, data ->
-        val recipes = data as? RecipeList ?: return@Page
-
-        if (recipes.recipes.isEmpty()) return@Page
-
-        RecipeContent(
+        Text(
             modifier = modifier,
-            recipe = recipes.recipes.firstOrNull(),
+            text = data as String,
+            style = MaterialTheme.typography.bodyLarge
         )
     }
 }

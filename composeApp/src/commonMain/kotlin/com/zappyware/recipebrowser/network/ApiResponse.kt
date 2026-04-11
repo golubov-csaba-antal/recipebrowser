@@ -1,8 +1,6 @@
 package com.zappyware.recipebrowser.network
 
-import com.zappyware.recipebrowser.data.Recipe
-
-data class ApiResponse(
-    val recipes: List<Recipe> = emptyList(),
+data class ApiResponse<T>(
+    val data: T? = null,
     val error: String? = null,
 )

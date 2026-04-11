@@ -79,7 +79,7 @@ fun TheMealRecipe.toRecipe(): Recipe {
 
     val ingredients = ingredientNames.zip(ingredientMeasures) { name, measure ->
         if (!name.isNullOrBlank() && !measure.isNullOrBlank()) {
-            Ingredient(name, measure)
+            Ingredient(name = name, measure = measure)
         } else {
             null
         }
