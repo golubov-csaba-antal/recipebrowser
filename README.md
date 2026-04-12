@@ -2,19 +2,29 @@ This is a Kotlin Multiplatform project targeting Android, iOS.
 
 The basic navigation flow works similar to the Panorama control in Windows Phone - one big and parallel-scrolling background image, a big and parallel-scrolling thin text, and the horizontal paging content.
 
-Not tested on iOS yet, only on my A55, so it might will change later if the big image cause problems on iOS. :)
+Actually, I always wanted to make a Windows Phone like app for a reason, and my favorite controls were the Pivot control and the Panorama control - mostly the latter one because of the scrolling background image and big texts.
+
+Not tested on iOS device yet, only on my A55 and in an iOS simulator, so it might will change later if the big image cause problems on iOS. :) In simulator, I couldn't see any problem, but that means nothing as far as I know.
 
 Screenshots:
 
-<img src="https://github.com/user-attachments/assets/c8050bc1-52a9-43c8-8156-f13eeb353fe1" width="240">
+<img src="https://github.com/user-attachments/assets/c256dbda-cd06-4666-8f79-09553b6bff46" width="240">
 
-<img src="https://github.com/user-attachments/assets/e337d601-2ce9-4c7f-a6ea-07e6756d636a" width="240">
+<img src="https://github.com/user-attachments/assets/3568d3fe-2710-4147-8725-dac28d453735" width="240">
 
-<img src="https://github.com/user-attachments/assets/f7d04bbf-3292-497f-9065-e0ae13e0748f" width="240">
+<img src="https://github.com/user-attachments/assets/0e8de3a9-3246-4625-b93c-5c0c4fbdeecf" width="240">
 
 Video:
 
-https://drive.google.com/file/d/1DSBn0iWkX1jF4t90TrHwggbc8QRZiQ8A/view?usp=sharing
+[https://drive.google.com/file/d/1DSBn0iWkX1jF4t90TrHwggbc8QRZiQ8A/view?usp=sharing](https://drive.google.com/file/d/1RUqskwUlkjhlapHk7pgf3v4wDAGt0W-z/view?usp=sharing)
+
+Planned features:
+
+- Recipe list of areas and ingredients and in browser.
+- Show recipe selected from the recipe list.
+- Mark recipes as favorite, and show them on a new tab.
+- Print recipes to PDF file.
+- Read recipes aloud (maybe plus an option to read it paragraph-by-paragraph).
 
 The modules of the project
 
