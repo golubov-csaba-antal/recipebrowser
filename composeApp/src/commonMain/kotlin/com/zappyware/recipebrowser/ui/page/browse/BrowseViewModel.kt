@@ -15,7 +15,12 @@ class BrowseViewModel(
 
     init {
         viewModelScope.launch {
-            uiState.emit(UIState.Success("Placeholder Text"))
+            val alphabet = ('A'..'Z').toList()
+            uiState.emit(UIState.Success(alphabet))
         }
+    }
+
+    fun onLoadRelatedRecipes(letter: Char) {
+        // todo
     }
 }

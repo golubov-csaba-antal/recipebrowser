@@ -15,13 +15,7 @@ class AreasViewModel(
 
     val uiState: MutableStateFlow<UIState> = MutableStateFlow(UIState.Loading)
 
-    init {
-        viewModelScope.launch {
-            getAreas()
-        }
-    }
-
-    private suspend fun getAreas() {
+    suspend fun getAreas() {
         val response = recipeRepository.getAreas()
         if (null == response.data) {
             uiState.emit(

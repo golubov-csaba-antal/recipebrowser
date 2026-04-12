@@ -15,13 +15,7 @@ class IngredientsViewModel(
 
     val uiState: MutableStateFlow<UIState> = MutableStateFlow(UIState.Loading)
 
-    init {
-        viewModelScope.launch {
-            getIngredients()
-        }
-    }
-
-    private suspend fun getIngredients() {
+    suspend fun getIngredients() {
         val response = recipeRepository.getIngredients()
         if (null == response.data) {
             uiState.emit(

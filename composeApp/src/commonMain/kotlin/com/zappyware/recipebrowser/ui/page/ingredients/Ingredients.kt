@@ -1,10 +1,14 @@
 package com.zappyware.recipebrowser.ui.page.ingredients
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.zappyware.recipebrowser.data.IngredientList
@@ -19,6 +23,9 @@ fun Ingredients(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
+    val bodyMedium = MaterialTheme.typography.bodyMedium
+    val buttonTextStyle = remember(bodyMedium) { bodyMedium.copy(shadow = null) }
+
     Page(
         modifier = modifier,
         uiState = uiState,
@@ -30,7 +37,8 @@ fun Ingredients(
         val listState = rememberLazyListState()
 
         LazyColumn(
-            modifier = modifier,
+            modifier = modifier
+                .safeContentPadding(),
             state = listState,
         ) {
             items(
@@ -41,11 +49,16 @@ fun Ingredients(
                 IngredientListItem(
                     modifier = Modifier.fillMaxWidth(),
                     ingredient = ingredient,
+                    buttonTextStyle = buttonTextStyle,
                     onLoadRelatedRecipes = {
                         viewModel.onLoadRelatedRecipes(ingredient)
                     }
                 )
             }
         }
+    }
+
+    LaunchedEffect(viewModel) {
+        viewModel.getIngredients()
     }
 }

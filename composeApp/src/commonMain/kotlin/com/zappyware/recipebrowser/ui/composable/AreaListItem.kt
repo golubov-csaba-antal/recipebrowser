@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.zappyware.recipebrowser.data.Area
 
@@ -16,6 +17,7 @@ import com.zappyware.recipebrowser.data.Area
 fun AreaListItem(
     modifier: Modifier = Modifier,
     area: Area,
+    buttonTextStyle: TextStyle,
     onLoadRelatedRecipes: () -> Unit,
 ) {
     Column(
@@ -37,7 +39,7 @@ fun AreaListItem(
         ) {
             Text(
                 text = "View all related recipes",
-                style = MaterialTheme.typography.bodyMedium,
+                style = buttonTextStyle,
             )
         }
     }

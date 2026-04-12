@@ -15,13 +15,7 @@ class CategoriesViewModel(
 
     val uiState: MutableStateFlow<UIState> = MutableStateFlow(UIState.Loading)
 
-    init {
-        viewModelScope.launch {
-            getCategories()
-        }
-    }
-
-    private suspend fun getCategories() {
+    suspend fun getCategories() {
         val response = recipeRepository.getCategories()
         if (null == response.data) {
             uiState.emit(

@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.zappyware.recipebrowser.data.Category
 
@@ -16,6 +17,7 @@ import com.zappyware.recipebrowser.data.Category
 fun CategoryListItem(
     modifier: Modifier = Modifier,
     category: Category,
+    buttonTextStyle: TextStyle,
     onLoadRelatedRecipes: () -> Unit,
 ) {
     Column(
@@ -42,7 +44,7 @@ fun CategoryListItem(
         ) {
             Text(
                 text = "View all related recipes",
-                style = MaterialTheme.typography.bodyMedium,
+                style = buttonTextStyle,
             )
         }
     }
